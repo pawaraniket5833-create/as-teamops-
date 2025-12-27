@@ -1,5 +1,52 @@
 import streamlit as st
 
+st.set_page_config(page_title="AS.SLOWPROCESSER", layout="wide")
+
+st.markdown("""
+<style>
+body {
+    background-color: #0f172a;
+    color: white;
+}
+
+.card {
+    background: linear-gradient(135deg, #0ea5e9, #2563eb);
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+    transition: transform 0.3s ease;
+}
+
+.card:hover {
+    transform: scale(1.03);
+}
+
+.icon {
+    font-size: 30px;
+}
+</style>
+""", unsafe_allow_html=True)
+st.markdown("""
+<div class="card">
+    <div class="icon">🚀</div>
+    <h2>Channel Dashboard</h2>
+    <p>Manage ideas, uploads, and growth</p>
+</div>
+""", unsafe_allow_html=True)
+st.markdown("""
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+""", unsafe_allow_html=True)
+
+st.markdown("""
+<div class="card">
+<i class="fa-solid fa-chart-line"></i>
+<h3>Growth Tracker</h3>
+</div>
+""", unsafe_allow_html=True)
+
+import streamlit as st
+
 st.set_page_config(page_title="AS TeamOps", layout="wide")
 
 # ---------- USERS ----------
