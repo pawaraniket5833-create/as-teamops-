@@ -74,7 +74,7 @@ def dashboard():
 
     if st.sidebar.button("🚪 Logout"):
         st.session_state.clear()
-        st.experimental_rerun()
+        st.rerun()
 
 # ---------- APP ----------
 if "logged_in" not in st.session_state:
