@@ -169,3 +169,30 @@ elif menu == "YouTube Growth":
 if st.sidebar.button("🚪 Logout"):
     st.session_state.clear()
     st.experimental_rerun()
+    # ------------------ TECH NEWS (Live) ------------------
+import requests
+
+elif menu == "Tech News":
+    st.subheader("📰 Latest Tech News")
+
+    API_KEY = "ad01e9dc6dce46c6979726dcbdcc8ae7"  # Your NewsAPI key
+    url = f"https://newsapi.org/v2/top-headlines?category=technology&language=en&pageSize=5&apiKey={API_KEY}"
+
+    try:
+        response = requests.get(url)
+        data = response.json()
+
+        if data["status"] == "ok" and data["totalResults"] > 0:
+            for article in data["articles"]:
+                st.markdown(f"""
+                <div class="white-card">
+                    <h4>🔹 <a href="{article['url']}" target="_blank">{article['title']}</a></h4>
+                    <p>{article['description'] or ""}</p>
+                    <small>Source: {article['source']['name']}</small>
+                </div>
+                <br>
+                """, unsafe_allow_html=True)
+        else:
+            st.warning("No news found at the moment.")
+    except Exception as e:
+        st.error(f"Error fetching news: {e}")
