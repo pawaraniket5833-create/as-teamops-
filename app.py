@@ -68,7 +68,7 @@ st.sidebar.markdown(f"**Role:** `{role}`")
 
 menu = st.sidebar.radio(
     "Navigation",
-    ["Dashboard", "Projects", "Upload Work", "Tech News"]
+    ["Dashboard", "Projects", "Upload Work", "Tech News", "Components", "YouTube Growth"]
 )
 
 # ------------------ HEADER ------------------
@@ -129,12 +129,7 @@ elif menu == "Projects":
 # ------------------ UPLOAD WORK ------------------
 elif menu == "Upload Work":
     st.subheader("📤 Upload Work Completion")
-
-    uploaded = st.file_uploader(
-        "Upload image of your work",
-        type=["png", "jpg", "jpeg"]
-    )
-
+    uploaded = st.file_uploader("Upload image of your work", type=["png", "jpg", "jpeg"])
     note = st.text_area("Work description")
 
     if st.button("Submit"):
@@ -156,33 +151,21 @@ elif menu == "Tech News":
             <li>🤖 Open-source robotics gaining popularity</li>
         </ul>
     </div>
-    """, unsafe_allow_html=True)    elif page == "📦 Components":
-        st.text_input("Component Name")
-        st.number_input("Quantity", 1)
-        st.button("Add Component")
+    """, unsafe_allow_html=True)
 
-    elif page == "📂 Projects":
-        st.table({
-            "Project": ["Smart Home", "Solar Tracker"],
-            "Budget": ["₹2500", "₹1800"],
-            "Views": ["12K", "8K"]
-        })
+# ------------------ COMPONENTS ------------------
+elif menu == "Components":
+    st.subheader("📦 Components")
+    st.text_input("Component Name")
+    st.number_input("Quantity", 1)
+    st.button("Add Component")
 
-    elif page == "📈 YouTube Growth":
-        st.line_chart([100, 300, 900, 2000, 4500])
+# ------------------ YOUTUBE GROWTH ------------------
+elif menu == "YouTube Growth":
+    st.subheader("📈 YouTube Growth Tracker")
+    st.line_chart([100, 300, 900, 2000, 4500])  # Replace with actual channel data
 
-    elif page == "📸 Upload Work":
-        st.file_uploader("Upload work proof", type=["jpg", "png"])
-
-    if st.sidebar.button("🚪 Logout"):
-        st.session_state.clear()
-        st.rerun()
-
-# ---------- APP ----------
-if "logged_in" not in st.session_state:
-    st.session_state.logged_in = False
-
-if st.session_state.logged_in:
-    dashboard()
-else:
-    login()
+# ------------------ LOGOUT ------------------
+if st.sidebar.button("🚪 Logout"):
+    st.session_state.clear()
+    st.experimental_rerun()
