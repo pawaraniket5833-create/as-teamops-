@@ -1,6 +1,8 @@
 import streamlit as st
 from datetime import datetime
+import requests
 
+# ------------------ PAGE CONFIG ------------------
 st.set_page_config(
     page_title="AS TeamOps",
     page_icon="🚀",
@@ -42,6 +44,10 @@ body {
     border-radius: 15px;
     margin-bottom: 20px;
 }
+a {
+    color: #1e88e5;
+    text-decoration: none;
+}
 </style>
 """, unsafe_allow_html=True)
 
@@ -63,13 +69,16 @@ projects = [
 st.sidebar.title("👥 Team Members")
 current_user = st.sidebar.selectbox("Login as", members.keys())
 role = members[current_user]
-
 st.sidebar.markdown(f"**Role:** `{role}`")
 
 menu = st.sidebar.radio(
     "Navigation",
     ["Dashboard", "Projects", "Upload Work", "Tech News", "Components", "YouTube Growth"]
 )
+
+if st.sidebar.button("🚪 Logout"):
+    st.session_state.clear()
+    st.experimental_rerun()
 
 # ------------------ HEADER ------------------
 st.markdown(f"""
@@ -82,10 +91,11 @@ st.markdown(f"""
 
 st.write("")
 
-# ------------------ DASHBOARD ------------------
-if menu == "Dashboard":
-    col1, col2, col3 = st.columns(3)
+# ------------------ PAGE FUNCTIONS ------------------
 
+# --- Dashboard Page ---
+def dashboard_page():
+    col1, col2, col3 = st.columns(3)
     with col1:
         st.markdown("""
         <div class="white-card">
@@ -94,7 +104,6 @@ if menu == "Dashboard":
             <b>+18% this month</b>
         </div>
         """, unsafe_allow_html=True)
-
     with col2:
         st.markdown("""
         <div class="white-card">
@@ -102,6 +111,90 @@ if menu == "Dashboard":
             <p>Total uploads</p>
             <b>24 Videos</b>
         </div>
+        """, unsafe_allow_html=True)
+    with col3:
+        st.markdown("""
+        <div class="white-card">
+            <h3>👀 Views</h3>
+            <p>Total reach</p>
+            <b>120K+</b>
+        </div>
+        """, unsafe_allow_html=True)
+
+# --- Projects Page ---
+def projects_page():
+    st.subheader("📂 Ongoing Projects")
+    for p in projects:
+        st.markdown(f"""
+        <div class="white-card">
+            <h4>{p['name']}</h4>
+            <p>Budget: ₹{p['budget']}</p>
+            <p>Views: {p['views']}</p>
+        </div>
+        <br>
+        """, unsafe_allow_html=True)
+
+# --- Upload Work Page ---
+def upload_work_page():
+    st.subheader("📤 Upload Work Completion")
+    uploaded = st.file_uploader("Upload image of your work", type=["png", "jpg", "jpeg"])
+    note = st.text_area("Work description")
+    if st.button("Submit"):
+        if uploaded:
+            st.success("✅ Work uploaded successfully!")
+            st.image(uploaded, width=250)
+            st.caption(f"Uploaded by {current_user} on {datetime.now().strftime('%d %b %Y')}")
+        else:
+            st.warning("Please upload an image.")
+
+# --- Tech News Page ---
+def tech_news_page():
+    st.subheader("📰 Latest Tech News")
+    API_KEY = "ad01e9dc6dce46c6979726dcbdcc8ae7"  # NewsAPI key
+    url = f"https://newsapi.org/v2/top-headlines?category=technology&language=en&pageSize=5&apiKey={API_KEY}"
+    try:
+        response = requests.get(url)
+        data = response.json()
+        if data["status"] == "ok" and data["totalResults"] > 0:
+            for article in data["articles"]:
+                st.markdown(f"""
+                <div class="white-card">
+                    <h4>🔹 <a href="{article['url']}" target="_blank">{article['title']}</a></h4>
+                    <p>{article['description'] or ""}</p>
+                    <small>Source: {article['source']['name']}</small>
+                </div>
+                <br>
+                """, unsafe_allow_html=True)
+        else:
+            st.warning("No news found at the moment.")
+    except Exception as e:
+        st.error(f"Error fetching news: {e}")
+
+# --- Components Page ---
+def components_page():
+    st.subheader("📦 Components")
+    st.text_input("Component Name")
+    st.number_input("Quantity", 1)
+    st.button("Add Component")
+
+# --- YouTube Growth Page ---
+def youtube_growth_page():
+    st.subheader("📈 YouTube Growth Tracker")
+    st.line_chart([100, 300, 900, 2000, 4500])  # Placeholder
+
+# ------------------ PAGE ROUTING ------------------
+if menu == "Dashboard":
+    dashboard_page()
+elif menu == "Projects":
+    projects_page()
+elif menu == "Upload Work":
+    upload_work_page()
+elif menu == "Tech News":
+    tech_news_page()
+elif menu == "Components":
+    components_page()
+elif menu == "YouTube Growth":
+    youtube_growth_page()        </div>
         """, unsafe_allow_html=True)
 
     with col3:
