@@ -200,7 +200,8 @@ elif menu == "YouTube Growth":
     with col3:
         st.markdown("""
         <div class="white-card">
-            <h3>👀 Views</h3>
+            # Replace with Unicode
+<h3>\U0001F440 Views</h3>
             <p>Total reach</p>
             <b>120K+</b>
         </div>
@@ -210,9 +211,8 @@ elif menu == "YouTube Growth":
 elif menu == "Projects":
     st.subheader("📂 Ongoing Projects")
     for p in projects:
-        st.markdown(f"""
-        <div class="white-card">
-            <h4>{p['name']}</h4>
+            # Replace with Unicode
+            <h3>\U0001F440 Views</h3>
             <p>Budget: ₹{p['budget']}</p>
             <p>Views: {p['views']}</p>
         </div>
