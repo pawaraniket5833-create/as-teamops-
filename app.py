@@ -159,19 +159,21 @@ def youtube_growth_page():
 # ------------------ ROUTING ------------------
 if menu == "Dashboard":
     dashboard_page()
+
 elif menu == "Projects":
     projects_page()
+
 elif menu == "Upload Work":
     upload_page()
+
 elif menu == "Tech News":
     tech_news_page()
+
 elif menu == "Components":
     components_page()
+
 elif menu == "YouTube Growth":
-    youtube_growth_page()        else:
-            st.warning("No news found at the moment.")
-    except Exception as e:
-        st.error(f"Error fetching news: {e}")
+    youtube_growth_page()
 
 # --- Components Page ---
 def components_page():
