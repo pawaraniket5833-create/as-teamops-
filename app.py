@@ -195,7 +195,6 @@ elif menu == "Components":
     components_page()
 elif menu == "YouTube Growth":
     youtube_growth_page()        
-        elif menu == "Dashboard":
     st.markdown("""
     <div>...</div>
     """, unsafe_allow_html=True)
