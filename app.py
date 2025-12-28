@@ -214,7 +214,15 @@ elif menu == "Projects":
     st.subheader("📂 Ongoing Projects")
     for p in projects:
             # Replace with Unicode
-            <h3>Views</h3>
+            st.markdown(
+    f"""
+    <div class="card">
+        <h3>Views</h3>
+        <p>{views}</p>
+    </div>
+    """,
+    unsafe_allow_html=True
+)
             st.markdown(f"""
 <p>Budget: &#8377; {p['budget']}</p>
 """, unsafe_allow_html=True)
