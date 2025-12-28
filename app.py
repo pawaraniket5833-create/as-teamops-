@@ -194,7 +194,7 @@ elif menu == "Tech News":
 elif menu == "Components":
     components_page()
 elif menu == "YouTube Growth":
-    youtube_growth_page()        </div>
+    youtube_growth_page()        
         """, unsafe_allow_html=True)
 
     with col3:
