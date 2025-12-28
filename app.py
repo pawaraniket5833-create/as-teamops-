@@ -215,7 +215,9 @@ elif menu == "Projects":
     for p in projects:
             # Replace with Unicode
             <h3>Views</h3>
-            <p>Budget: ₹{p['budget']}</p>
+            st.markdown(f"""
+<p>Budget: &#8377; {p['budget']}</p>
+""", unsafe_allow_html=True)
             <p>Views: {p['views']}</p>
         </div>
         <br>
